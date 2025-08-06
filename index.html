@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Assistance Booking</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #001f3f; /* Navy blue */
+            color: white;
+            transition: background-color 0.5s;
+        }
+        
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: left;
+            color: #fff;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        /* Improved dropdown styling */
+        select option {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            padding-right: 30px;
+        }
+        
+        input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        #confirmation {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(0,255,0,0.1);
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            color: #fff;
+        }
+        
+        .success-gif {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .services-list, .courses-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .services-list li, .courses-list li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .welcome-animation {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Page -->
+    <div id="welcome-page" class="page welcome-animation">
+        <h1>Welcome to Our Course Assistance Service!</h1>
+        <p>We're thrilled you're here to get the support you need for your educational journey.</p>
+        <p>Our team of experts is ready to help you succeed in your studies and achieve your goals.</p>
+        <a href="#" class="btn" onclick="showPage('intro-page'); return false;">Learn More About Us</a>
+    </div>
+    
+    <!-- Introduction Page -->
+    <div id="intro-page" class="page hidden">
+        <h2>Our Story</h2>
+        <p>Founded in 2024, we began with a simple mission: to provide high-quality educational support to students who need it most.</p>
+        <p>What started as a small team of dedicated tutors has grown into a comprehensive assistance service helping hundreds of students each year.</p>
+        <p>We believe every student deserves personalized support to unlock their full potential.</p>
+        <a href="#" class="btn" onclick="showPage('services-page'); return false;">Our Services</a>
+    </div>
+    
+    <!-- Services Page -->
+    <div id="services-page" class="page hidden">
+        <h2>Our Services</h2>
+        <p>We offer specialized assistance to help you excel in your coursework:</p>
+        
+        <div class="services-list">
+            <h3>Assistance Types:</h3>
+            <ul>
+                <li><strong>Logbook Assistance:</strong> Comprehensive support for completing your practical logbooks</li>
+                <li><strong>Summative Assessments:</strong> Expert guidance for your final assessments</li>
+            </ul>
+            
+            <h3>Courses We Support:</h3>
+            <ul class="courses-list">
+                <li>End User Computing Level 3</li>
+                <li>IT-System Support Level 3</li>
+                <li>Contact Center Level 3</li>
+                <li>Business Administration Level 3</li>
+                <li>Business Administration Level 4</li>
+                <li>Generic Management Level 3</li>
+                <li>Generic Management Level 4</li>
+            </ul>
+        </div>
+        
+        <a href="#" class="btn" onclick="showPage('booking-page'); return false;">Book Assistance Now</a>
+    </div>
+    
+    <!-- Booking Page -->
+    <div id="booking-page" class="page hidden">
+        <div class="form-container">
+            <h1>Course Assistance Booking</h1>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="">Select a course</option>
+                        <option value="End User Computing level 3">End User Computing level 3</option>
+                        <option value="IT systems support level 3">IT systems support level 3</option>
+                        <option value="Generic management level 3">Generic management level 3</option>
+                        <option value="Generic management level 4">Generic management level 4</option>
+                        <option value="Business administration level 3">Business administration level 3</option>
+                        <option value="Business administration level 4">Business administration level 4</option>
+                        <option value="Contact Center level 3">Contact Center level 3</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="assistanceType">Type of Assistance:</label>
+                    <select id="assistanceType" name="assistanceType" required>
+                        <option value="">Select assistance type</option>
+                        <option value="Logbook">Logbook</option>
+                        <option value="Summative">Summative</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp Number:</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required>
+                </div>
+                
+                <button type="submit">Submit Request</button>
+            </form>
+            
+            <div id="confirmation">
+                <img src="https://media.giphy.com/media/ibolLe3mOqHE3PQTtk/giphy.gif" alt="Success tick" class="success-gif">
+                <h2>Thank you for your booking!</h2>
+                <p>We'll contact you shortly on WhatsApp to discuss your requirements.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show the requested page
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const course = document.getElementById('course').value;
+            const assistanceType = document.getElementById('assistanceType').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            
+            // Send data to Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbxdvM6wumSzU17fteBKc6-LRzTMM3Bpq0bWzC2YORNiMz5gmbSyE1qVhLQpLJJ5Bw8cOw/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName: fullName,
+                    course: course,
+                    assistanceType: assistanceType,
+                    whatsapp: whatsapp,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            
+            // Show confirmation and reset form
+            document.getElementById('confirmation').style.display = 'block';
+            document.getElementById('bookingForm').reset();
+            
+            // Scroll to confirmation
+            document.getElementById('confirmation').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
